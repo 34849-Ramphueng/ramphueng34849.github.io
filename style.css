@@ -1,254 +1,538 @@
-:root{
-  --ink:#23262B;
-  --paper:#FAF7F1;
-  --panel:#F1ECE1;
-  --navy:#1F2A44;
-  --teal:#2F6F62;
-  --mustard:#C9973C;
-  --line: rgba(35,38,43,0.14);
-}
-*{ box-sizing:border-box; margin:0; padding:0; }
-html{ scroll-behavior:smooth; }
-body{
-  font-family:'Sarabun', sans-serif;
-  color:var(--ink);
-  background:var(--paper);
-  line-height:1.7;
-}
-h1,h2,h3{ font-family:'Noto Serif Thai', serif; }
+/* ==========================================================================
+   Design tokens
+   ========================================================================== */
+:root {
+  --blue-deep:   #0B4F8A;
+  --blue-main:   #1670B8;
+  --blue-bright: #2E9BE0;
+  --blue-tint:   #EAF4FC;
+  --blue-pale:   #F6FAFE;
+  --white:       #FFFFFF;
+  --ink:         #122A3E;
+  --ink-soft:    #4E6377;
+  --line:        #CFE4F5;
 
-/* ---------- NAV ---------- */
-.nav{
-  position:fixed;
-  top:0; left:0; right:0;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:clamp(10px, 2vw, 28px);
-  padding:16px 20px;
-  background:rgba(250,247,241,0.9);
+  --font-head: 'Kanit', sans-serif;
+  --font-body: 'Sarabun', sans-serif;
+
+  --nav-height: 72px;
+  --max-width: 960px;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: var(--nav-height);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation: none !important; transition: none !important; }
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-body);
+  color: var(--ink);
+  background: var(--white);
+  line-height: 1.75;
+}
+
+h1, h2, h3 {
+  font-family: var(--font-head);
+  color: var(--blue-deep);
+  margin: 0;
+}
+
+a { color: var(--blue-main); }
+
+.section { padding: 96px 24px; }
+.section__inner { max-width: var(--max-width); margin: 0 auto; }
+
+.section__eyebrow {
+  font-family: var(--font-head);
+  font-size: 0.9rem;
+  color: var(--blue-bright);
+  letter-spacing: 0.06em;
+  margin: 0 0 4px;
+}
+
+.section__title {
+  font-size: clamp(1.7rem, 4vw, 2.4rem);
+  font-weight: 600;
+  margin-bottom: 32px;
+  padding-bottom: 16px;
+  border-bottom: 3px solid var(--blue-tint);
+  display: inline-block;
+}
+
+/* ==========================================================================
+   Navbar
+   ========================================================================== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.92);
   backdrop-filter: blur(8px);
-  border-bottom:1px solid var(--line);
-  z-index:100;
-  flex-wrap:wrap;
-}
-.nav a{
-  text-decoration:none;
-  color:var(--ink);
-  font-size:14px;
-  letter-spacing:0.02em;
-  padding:6px 4px;
-  position:relative;
-  opacity:0.7;
-  transition: opacity .2s ease;
-}
-.nav a::after{
-  content:"";
-  position:absolute;
-  left:0; right:0; bottom:-2px;
-  height:2px;
-  background:var(--teal);
-  transform:scaleX(0);
-  transform-origin:left;
-  transition:transform .25s ease;
-}
-.nav a:hover{ opacity:1; }
-.nav a.active{ opacity:1; color:var(--teal); }
-.nav a.active::after{ transform:scaleX(1); }
-
-section{
-  min-height:100vh;
-  padding:120px 24px 80px;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-}
-.inner{
-  max-width:720px;
-  margin:0 auto;
-  width:100%;
+  border-bottom: 1px solid var(--line);
 }
 
-/* ---------- COVER ---------- */
-#cover{
-  background:var(--navy);
-  color:var(--paper);
-  text-align:center;
-  padding-top:0;
-}
-#cover .eyebrow{
-  font-size:14px;
-  color:var(--mustard);
-  margin-bottom:18px;
-}
-#cover h1{
-  font-size:clamp(38px, 7vw, 68px);
-  font-weight:700;
-  line-height:1.15;
-}
-#cover .avatar{
-  width:150px;
-  height:150px;
-  object-fit:cover;
-  border-radius:50%;
-  border:3px solid rgba(250,247,241,0.4);
-  margin-bottom:28px;
-}
-#cover p.role{
-  margin-top:16px;
-  font-size:18px;
-  color:rgba(250,247,241,0.75);
-}
-#cover .scroll-hint{
-  margin-top:56px;
-  font-size:13px;
-  color:rgba(250,247,241,0.5);
+.navbar__rail {
+  height: 4px;
+  width: 100%;
+  background:
+    repeating-linear-gradient(90deg, var(--blue-main) 0 22px, transparent 22px 30px);
+  opacity: 0.7;
 }
 
-/* ---------- SECTION HEADS ---------- */
-.section-label{
-  font-size:13px;
-  color:var(--teal);
-  margin-bottom:10px;
-}
-h2{
-  font-size:clamp(26px, 4vw, 34px);
-  font-weight:600;
-  margin-bottom:28px;
-  color:var(--navy);
+.navbar__inner {
+  max-width: 1180px;
+  margin: 0 auto;
+  height: var(--nav-height);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
 }
 
-/* ---------- INTRO ---------- */
-#intro{ background:var(--paper); }
-#intro p{ font-size:18px; max-width:62ch; }
+.navbar__brand {
+  font-family: var(--font-head);
+  font-weight: 700;
+  font-size: 1.4rem;
+  color: var(--blue-deep);
+  text-decoration: none;
+}
+.navbar__brand span { color: var(--blue-bright); }
 
-/* ---------- BIO ---------- */
-#bio{ background:var(--panel); }
-.bio-grid{
-  display:grid;
-  grid-template-columns:repeat(2, 1fr);
-  gap:18px 32px;
-  margin-top:8px;
-}
-.bio-item{
-  border-bottom:1px solid var(--line);
-  padding-bottom:14px;
-}
-.bio-item .label{
-  font-size:13px;
-  color:var(--teal);
-  margin-bottom:4px;
-}
-.bio-item .value{ font-size:17px; }
-
-/* ---------- EDUCATION (timeline) ---------- */
-#education{ background:var(--paper); }
-.timeline{
-  margin-top:8px;
-  border-left:2px solid var(--line);
-  padding-left:28px;
-}
-.timeline-item{
-  position:relative;
-  padding-bottom:34px;
-}
-.timeline-item:last-child{ padding-bottom:0; }
-.timeline-item::before{
-  content:"";
-  position:absolute;
-  left:-34px;
-  top:4px;
-  width:10px; height:10px;
-  border-radius:50%;
-  background:var(--teal);
-}
-.timeline-item .year{
-  font-size:14px;
-  color:var(--teal);
-  margin-bottom:4px;
-}
-.timeline-item .school{
-  font-size:19px;
-  font-weight:600;
-  color:var(--navy);
-}
-.timeline-item .detail{
-  margin-top:4px;
-  color:rgba(35,38,43,0.75);
+.navbar__links {
+  list-style: none;
+  display: flex;
+  gap: 4px;
+  margin: 0;
+  padding: 0;
 }
 
-/* ---------- FURTHER STUDY ---------- */
-#further{ background:var(--navy); color:var(--paper); }
-#further .section-label{ color:var(--mustard); }
-#further h2{ color:var(--paper); }
-#further p{ font-size:18px; max-width:62ch; color:rgba(250,247,241,0.85); }
-#further .field-tags{
-  margin-top:24px;
-  display:flex;
-  flex-wrap:wrap;
-  gap:10px;
-}
-#further .field-tags span{
-  border:1px solid rgba(250,247,241,0.35);
-  padding:8px 16px;
-  border-radius:100px;
-  font-size:14px;
+.navbar__links a {
+  display: inline-block;
+  padding: 8px 14px;
+  font-size: 0.96rem;
+  color: var(--ink-soft);
+  text-decoration: none;
+  border-radius: 4px;
+  transition: color 0.2s ease, background 0.2s ease;
 }
 
-/* ---------- ACTIVITIES ---------- */
-#activities{ background:var(--paper); }
-.activity-list{ margin-top:8px; }
-.activity{
-  display:flex;
-  gap:20px;
-  padding:18px 0;
-  border-bottom:1px solid var(--line);
-}
-.activity:last-child{ border-bottom:none; }
-.activity .dot{
-  flex:none;
-  width:8px; height:8px;
-  border-radius:50%;
-  background:var(--mustard);
-  margin-top:9px;
-}
-.activity .title{ font-weight:600; font-size:17px; color:var(--navy); }
-.activity .desc{ color:rgba(35,38,43,0.75); margin-top:2px; }
-
-/* ---------- SKILLS ---------- */
-#skills{ background:var(--panel); }
-.skill-grid{
-  margin-top:12px;
-  display:grid;
-  gap:16px;
-}
-.skill-row .top{
-  display:flex;
-  justify-content:space-between;
-  font-size:15px;
-  margin-bottom:6px;
-}
-.skill-row .track{
-  height:6px;
-  background:rgba(35,38,43,0.12);
-  border-radius:4px;
-  overflow:hidden;
-}
-.skill-row .fill{
-  height:100%;
-  background:var(--teal);
-  border-radius:4px;
+.navbar__links a:hover {
+  color: var(--blue-deep);
+  background: var(--blue-tint);
 }
 
-footer{
-  text-align:center;
-  padding:36px 20px;
-  font-size:13px;
-  color:rgba(35,38,43,0.5);
-  background:var(--paper);
+.navbar__links a.active {
+  color: var(--blue-deep);
+  font-weight: 600;
+  background: var(--blue-tint);
 }
 
-@media (max-width:600px){
-  .bio-grid{ grid-template-columns:1fr; }
-  .nav{ gap:10px; padding:12px 14px; justify-content:flex-start; overflow-x:auto; }
+.navbar__toggle {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+}
+.navbar__toggle span {
+  width: 24px;
+  height: 2px;
+  background: var(--blue-deep);
+}
+
+@media (max-width: 880px) {
+  .navbar__links {
+    position: absolute;
+    top: var(--nav-height);
+    left: 0;
+    right: 0;
+    flex-direction: column;
+    background: var(--white);
+    border-bottom: 1px solid var(--line);
+    padding: 8px 16px 16px;
+    display: none;
+  }
+  .navbar__links.open { display: flex; }
+  .navbar__toggle { display: flex; }
+}
+
+/* ==========================================================================
+   Hero (หน้าแรก)
+   ========================================================================== */
+.hero {
+  position: relative;
+  min-height: calc(100vh - var(--nav-height) - 4px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 64px 24px 120px;
+  background:
+    radial-gradient(circle at 50% 0%, var(--blue-tint), var(--white) 65%);
+  text-align: center;
+}
+
+.hero__center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  max-width: 640px;
+}
+
+.hero__photo {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 3px dashed var(--blue-bright);
+  background: var(--blue-tint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--blue-main);
+  font-size: 0.9rem;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+.hero__photo img {
+  width: 100%; height: 100%; object-fit: cover;
+}
+
+.hero__name {
+  font-size: clamp(1.6rem, 4vw, 2.2rem);
+  font-weight: 600;
+}
+.hero__nickname { color: var(--blue-bright); font-weight: 400; }
+
+.hero__detail {
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+
+.hero__contact {
+  position: absolute;
+  left: 32px;
+  bottom: 40px;
+  text-align: left;
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 18px 22px;
+  box-shadow: 0 6px 20px rgba(11, 79, 138, 0.08);
+}
+
+.hero__contact-title {
+  font-family: var(--font-head);
+  font-size: 1rem;
+  color: var(--blue-deep);
+  margin: 0 0 10px;
+  font-weight: 600;
+}
+
+.hero__contact ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.hero__contact-label {
+  display: inline-block;
+  width: 84px;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+}
+
+.hero__contact a {
+  font-size: 0.92rem;
+  text-decoration: none;
+  border-bottom: 1px solid transparent;
+}
+.hero__contact a:hover { border-bottom-color: var(--blue-main); }
+
+@media (max-width: 640px) {
+  .hero__contact {
+    position: static;
+    margin-top: 36px;
+  }
+}
+
+.hero__scroll {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 26px;
+  height: 42px;
+  border: 2px solid var(--blue-bright);
+  border-radius: 14px;
+}
+.hero__scroll span {
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  width: 4px;
+  height: 8px;
+  background: var(--blue-bright);
+  border-radius: 2px;
+  transform: translateX(-50%);
+  animation: scrollDot 1.6s ease-in-out infinite;
+}
+@keyframes scrollDot {
+  0%   { top: 6px;  opacity: 1; }
+  70%  { top: 22px; opacity: 0.2; }
+  100% { top: 6px;  opacity: 0; }
+}
+
+/* ==========================================================================
+   Railway-inspired section divider
+   ========================================================================== */
+.rail-divider {
+  height: 34px;
+  background:
+    repeating-linear-gradient(90deg, var(--blue-tint) 0 34px, transparent 34px 44px),
+    linear-gradient(var(--blue-bright), var(--blue-bright));
+  background-size: auto 100%, 100% 4px;
+  background-position: center, center;
+  background-repeat: repeat-x, no-repeat;
+}
+
+/* ==========================================================================
+   คำนำ
+   ========================================================================== */
+.foreword { background: var(--blue-pale); }
+.foreword__text p {
+  max-width: 72ch;
+  margin: 0 0 20px;
+  color: var(--ink-soft);
+}
+.foreword__text p:last-child { margin-bottom: 0; }
+
+/* ==========================================================================
+   ประวัติส่วนตัว
+   ========================================================================== */
+.profile__grid {
+  display: grid;
+  grid-template-columns: 220px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+
+.profile__photo {
+  width: 220px;
+  height: 260px;
+  border-radius: 12px;
+  border: 3px dashed var(--blue-bright);
+  background: var(--blue-tint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--blue-main);
+  font-size: 0.9rem;
+  overflow: hidden;
+}
+.profile__photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.profile__list {
+  margin: 0;
+  display: grid;
+  gap: 14px;
+}
+.profile__list > div {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 12px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
+}
+.profile__list dt {
+  color: var(--blue-deep);
+  font-weight: 600;
+  font-size: 0.95rem;
+}
+.profile__list dd {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 700px) {
+  .profile__grid { grid-template-columns: 1fr; }
+  .profile__photo { width: 180px; height: 210px; margin: 0 auto; }
+  .profile__list > div { grid-template-columns: 1fr; gap: 2px; }
+}
+
+/* ==========================================================================
+   ประวัติการศึกษา — เส้นทางรถไฟแนวตั้ง
+   ========================================================================== */
+.education { background: var(--blue-pale); }
+
+.rail-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0 0 0 32px;
+  position: relative;
+}
+.rail-timeline::before {
+  content: "";
+  position: absolute;
+  left: 8px;
+  top: 6px;
+  bottom: 6px;
+  width: 4px;
+  background: repeating-linear-gradient(
+    to bottom, var(--blue-bright) 0 8px, transparent 8px 16px
+  );
+}
+.rail-timeline li {
+  position: relative;
+  padding: 0 0 32px 24px;
+}
+.rail-timeline li::before {
+  content: "";
+  position: absolute;
+  left: -32px;
+  top: 4px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--white);
+  border: 4px solid var(--blue-main);
+}
+.rail-timeline li:last-child { padding-bottom: 0; }
+
+.rail-timeline__level {
+  display: block;
+  font-family: var(--font-head);
+  color: var(--blue-deep);
+  font-weight: 600;
+  font-size: 1.05rem;
+}
+.rail-timeline__school {
+  display: block;
+  color: var(--ink-soft);
+}
+
+/* ==========================================================================
+   แนวทางการเรียนต่อ
+   ========================================================================== */
+.future__subtitle {
+  font-size: 1.15rem;
+  color: var(--blue-main);
+  font-weight: 500;
+  margin-bottom: 18px;
+}
+.future__text p {
+  max-width: 74ch;
+  margin: 0 0 20px;
+  color: var(--ink-soft);
+}
+.future__text p:last-child { margin-bottom: 0; }
+
+/* ==========================================================================
+   กิจกรรม
+   ========================================================================== */
+.activity-item {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  gap: 32px;
+  align-items: center;
+  padding: 28px 0;
+  border-bottom: 1px solid var(--line);
+}
+.activity-item:last-child { border-bottom: none; }
+
+.activity-item__photo {
+  width: 240px;
+  height: 160px;
+  border-radius: 10px;
+  border: 3px dashed var(--blue-bright);
+  background: var(--blue-tint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--blue-main);
+  font-size: 0.9rem;
+  overflow: hidden;
+}
+.activity-item__photo img { width: 100%; height: 100%; object-fit: cover; }
+
+.activity-item__text h3 {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+  color: var(--blue-deep);
+}
+.activity-item__text p {
+  margin: 0;
+  color: var(--ink-soft);
+}
+
+@media (max-width: 700px) {
+  .activity-item { grid-template-columns: 1fr; }
+  .activity-item__photo { width: 100%; }
+}
+
+/* ==========================================================================
+   ความสามารถพิเศษ
+   ========================================================================== */
+.skills { background: var(--blue-pale); }
+
+.skills__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+.skill-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 32px 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.skill-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 24px rgba(11, 79, 138, 0.12);
+}
+.skill-card__icon {
+  font-size: 2rem;
+  color: var(--blue-bright);
+}
+.skill-card__label {
+  font-family: var(--font-head);
+  color: var(--blue-deep);
+  font-weight: 500;
+}
+
+@media (max-width: 640px) {
+  .skills__grid { grid-template-columns: 1fr; }
+}
+
+/* ==========================================================================
+   Footer
+   ========================================================================== */
+.site-footer {
+  text-align: center;
+  padding: 28px 16px;
+  color: var(--ink-soft);
+  font-size: 0.88rem;
+  border-top: 1px solid var(--line);
 }
