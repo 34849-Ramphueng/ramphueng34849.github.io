@@ -2,15 +2,15 @@
    Design tokens
    ========================================================================== */
 :root {
-  --blue-deep:   #A6285F;
-  --blue-main:   #D6336C;
-  --blue-bright: #F06595;
-  --blue-tint:   #FCEAF1;
-  --blue-pale:   #FFF6F9;
+  --blue-deep:   #0B4F8A;
+  --blue-main:   #1670B8;
+  --blue-bright: #2E9BE0;
+  --blue-tint:   #EAF4FC;
+  --blue-pale:   #F6FAFE;
   --white:       #FFFFFF;
-  --ink:         #3A2130;
-  --ink-soft:    #77596A;
-  --line:        #F6D9E4;
+  --ink:         #122A3E;
+  --ink-soft:    #4E6377;
+  --line:        #CFE4F5;
 
   --font-head: 'Kanit', sans-serif;
   --font-body: 'Sarabun', sans-serif;
@@ -102,12 +102,12 @@ a { color: var(--blue-main); }
 
 .navbar__brand {
   font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 1.4rem;
+  font-weight: 600;
+  font-size: 1.15rem;
   color: var(--blue-deep);
   text-decoration: none;
+  white-space: nowrap;
 }
-.navbar__brand span { color: var(--blue-bright); }
 
 .navbar__links {
   list-style: none;
@@ -515,6 +515,22 @@ a { color: var(--blue-main); }
   transform: translateY(-4px);
   box-shadow: 0 10px 24px rgba(11, 79, 138, 0.12);
 }
+.skill-card__photo {
+  width: 120px;
+  height: 120px;
+  border-radius: 50%;
+  border: 3px dashed var(--blue-bright);
+  background: var(--blue-tint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  color: var(--blue-main);
+  font-size: 0.8rem;
+  overflow: hidden;
+}
+.skill-card__photo img { width: 100%; height: 100%; object-fit: cover; }
+
 .skill-card__icon {
   font-size: 2rem;
   color: var(--blue-bright);
